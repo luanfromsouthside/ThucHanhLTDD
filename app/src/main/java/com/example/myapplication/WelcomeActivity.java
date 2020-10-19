@@ -20,6 +20,6 @@ public class WelcomeActivity extends Activity {
                 startActivity(intent);
                 finish();
             }
-        }, 5000);
+        }, 3000);
     }
 }

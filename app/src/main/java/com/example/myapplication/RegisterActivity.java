@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.regex.Pattern;
 
@@ -37,32 +38,21 @@ public class RegisterActivity extends Activity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isValid(edtEmail.getText().toString())){
-                    edtEmail.setError("Invalid Email Address");
-                }
-                if(edtUsername.getText().toString().isEmpty()){
-                    edtUsername.setError("Username cannot be null");
-                }
-                if(edtPassword.getText().toString().isEmpty()){
-                    edtPassword.setError("Password Required");
-                }
-                if(edtConfirm.getText().toString().isEmpty()){
-                    edtConfirm.setError("Password required");
-                }
-                if(edtPassword.getText().toString().equals(edtConfirm.getText().toString())){
+                if(IsSuccessSignUp()){
                     Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                     intent.putExtra("username",edtUsername.getText().toString());
                     intent.putExtra("password",edtPassword.getText().toString());
                     setResult(101,intent);
+                    Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    edtPassword.setError("Password and confirm password does not match");
-                    edtConfirm.setText("");
-                    return;
+                    Toast.makeText(RegisterActivity.this, "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
+    //Regax Email
     public static boolean isValid(String email){
         String emailRegax = "^[a-zA-Z0-9_+&*-]+(?:\\."+
                             "[a-zA-Z0-9_+&*-]+)*@"+
@@ -71,5 +61,37 @@ public class RegisterActivity extends Activity {
         Pattern pat=Pattern.compile(emailRegax);
         if(email==null) return false;
         return pat.matcher(email).matches();
+    }
+
+    //Kiểm tra đăng ký
+    public boolean IsSuccessSignUp(){
+        boolean error = true;
+        if(!isValid(edtEmail.getText().toString())){
+            edtEmail.setError("Invalid Email Address");
+            error = false;
+        }
+        if(edtUsername.getText().toString().isEmpty()){
+            edtUsername.setError("Username cannot be null");
+            error = false;
+        }
+        if(edtPassword.getText().toString().isEmpty()){
+            edtPassword.setError("Password Required");
+            error = false;
+        }
+        if(edtConfirm.getText().toString().isEmpty()){
+            edtConfirm.setError("Password required");
+            error = false;
+        }
+        if(edtPassword.getText().toString().isEmpty()){
+            error = false;
+        }
+        if(!edtPassword.getText().toString().equals(edtConfirm.getText().toString())){
+            error = false;
+        }
+        if(edtPassword.getText().toString().length()<6){
+            edtPassword.setError(("Minium 6 characters"));
+            error = false;
+        }
+        return error;
     }
 }
