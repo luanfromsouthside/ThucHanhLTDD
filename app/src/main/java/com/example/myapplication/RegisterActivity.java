@@ -83,6 +83,7 @@ public class RegisterActivity extends Activity {
             error = false;
         }
         if(edtPassword.getText().toString().isEmpty()){
+            edtPassword.setError("Password cannot empty");
             error = false;
         }
         if(edtPassword.getText().toString().length()<6){
