@@ -85,11 +85,12 @@ public class RegisterActivity extends Activity {
         if(edtPassword.getText().toString().isEmpty()){
             error = false;
         }
-        if(!edtPassword.getText().toString().equals(edtConfirm.getText().toString())){
-            error = false;
-        }
         if(edtPassword.getText().toString().length()<6){
             edtPassword.setError(("Minium 6 characters"));
+            error = false;
+        }
+        if(!edtPassword.getText().toString().equals(edtConfirm.getText().toString())){
+            edtConfirm.setError("Password and confirm password does not match");
             error = false;
         }
         return error;
