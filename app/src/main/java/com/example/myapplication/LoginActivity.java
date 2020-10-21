@@ -31,6 +31,7 @@ public class LoginActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivityForResult(intent, 100);
+                overridePendingTransition(R.anim.enter_activity,R.anim.out_activity);
             };
         });
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +64,7 @@ public class LoginActivity extends Activity {
                     Intent intent = new Intent(LoginActivity.this,InfoActivity.class);
                     intent.putExtra("Username",editTextUser.getText().toString());
                     startActivity(intent);
+                    overridePendingTransition(R.anim.enter_activity,R.anim.out_activity);
                 }
             }
         });

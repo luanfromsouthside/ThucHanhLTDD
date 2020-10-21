@@ -33,6 +33,7 @@ public class RegisterActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.enter_activity,R.anim.out_activity);
             }
         });
         btnSignIn.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +46,7 @@ public class RegisterActivity extends Activity {
                     setResult(101,intent);
                     Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                     finish();
+                    overridePendingTransition(R.anim.enter_activity,R.anim.out_activity);
                 } else {
                     Toast.makeText(RegisterActivity.this, "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
                 }
